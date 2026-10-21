@@ -255,6 +255,7 @@ private:
 		float to_percent = 0.0;
 	};
 
+	static bool _callable_bake_func_step(float p_progress, const String &p_description, void *, bool p_refresh);
 	static bool _lightmap_bake_step_function(float p_completion, const String &p_text, void *ud, bool p_refresh);
 
 	struct GenProbesOctree {
@@ -353,6 +354,8 @@ public:
 	AABB get_aabb() const override;
 
 	BakeError bake(Node *p_from_node, String p_image_data_path = "", Lightmapper::BakeStepFunc p_bake_step = nullptr, void *p_bake_userdata = nullptr);
+
+	BakeError bake_(Node *p_from_node, const String &p_image_data_path = "", const Callable &p_bake_step_callable = Callable());
 
 	virtual PackedStringArray get_configuration_warnings() const override;
 
